@@ -1,0 +1,41 @@
+<h1>Cost Sheet</h1>
+<div>
+    <p>Order #<span>{{order.id}}</span></p>
+    {% if order.order_finished %}
+    <p>Order<span> finished</span></p>
+    {% else %}
+    <p>Order<span> in process</span></p>
+    {% endif %}
+    <p>Article description: <span>{{order.description}}</span></p>
+    <p>Amount: <span>{{order.amount}}</span></p>
+    <p>Order date: <span>{{order.order_date}}</span></p>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Direct Materials</th>
+            <th></th>
+            <th>Direct Labor</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Requisition #</td>
+            <td>Cost</td>
+            <td>Work ticket #</td>
+            <td>Cost</td>
+        </tr>
+        {% for requisition in order.requisition_set.all %}
+        <tr>
+            <td>{{requisition.id}}</td>
+            <td>{{requisition.total_cost}}</td>
+        {% endfor %}
+        </tr>  
+    </table>
+</div>
+<div>
+    <h3>Cost Summary</h3>
+    <p>Direct Materials: ${{requisition_cost}}</p>
+    <p>Direct Labor: ${{labor}}</p>
+    <p>Total Cost: $ </p>
+    <p>Unitary Cost: $</p>
+</div>
